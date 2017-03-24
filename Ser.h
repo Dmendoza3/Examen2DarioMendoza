@@ -21,10 +21,10 @@ class Ser
 		Bando* bando;
 		
 		//Metodos
-		Ser(){};
+		Ser(int ra, int ed, string na, FrutaDiablo* fr, bool haki1, bool haki2, bool haki3, Bando* ba);
 
 		string Raza(){
-			return (string){"gyojin", "kyojin", "ningyo", "humano", "mink", "skypieans"}[raza];
+			return (string[6]){"gyojin", "kyojin", "ningyo", "humano", "mink", "skypieans"}[raza];
 		};
 
 		string Fruta()
@@ -46,17 +46,9 @@ class Ser
 			return msg;
 		}
 
-		string to_string()
-		{
-			return "Ser\nRaza: " + raza + "\nEdad: " + edad + "\nNombre" + name + 
-					"\nFruta del diablo: " + fruta->to_string() + Hakis() + "Bando: " + bando->to_string();
-		}
+		string to_string();
 
-		~Ser()
-		{
-			delete bando;
-			delete fruta;
-		}
+		~Ser();
 };
 
 #endif

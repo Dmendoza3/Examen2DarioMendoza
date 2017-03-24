@@ -8,14 +8,9 @@ class Logia : public FrutaDiablo
 	public:
 		string elemento;
 		
-		Logia(string name, string ele) : FrutaDiablo(name){
-			elemento = ele;
-		}
+		Logia(string name, string ele);
 
-		string to_string()
-        {
-            return "Logia\n\tNombre: " + nombre + "\n\tElemento: " + elemento + "\n";
-        }
+		string to_string();
 };
 
 #endif

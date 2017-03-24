@@ -8,14 +8,10 @@ class Revolucionarios : public Bando
 	public:
 		string fechaIngreso;
 
-		Revolucionarios(string fecha){
-			fechaIngreso = fecha;
-		}
+		Revolucionarios(string fecha);	
+		
 
-		string to_string()
-        {
-            return "Revolucionarios\nFecha de ingreso" + fechaIngreso + "\n";
-        }
+		string to_string();
 };
 
 #endif

@@ -18,7 +18,8 @@
 
 void guardarSer(Ser* ser)
 {
-	ostream fileSer("./seres/" + ser->nombre.cstr() + ".log");
+	string path = "./seres/" + ser->name + ".log";
+	ofstream fileSer(path.c_str());
 
 	fileSer << ser->to_string();
 
@@ -36,7 +37,7 @@ Bando* pedirBando()
 		<<		"2. Revolucionarios\n"
 		<<		"->";
 		cin >> op;
-	}while(Opcion(op,3));
+	}while(Opcion(op,2));
 
 	switch(op)
 	{
@@ -56,7 +57,7 @@ Bando* pedirBando()
 				<<		"4. almirante de flota\n"
 				<<		"->";
 				cin >> rango;
-			}while(Opcion(rango, 5));
+			}while(Opcion(rango, 4));
 
 			return new Marina(fechaIngreso, rango);
 		}
@@ -75,10 +76,11 @@ Bando* pedirBando()
 				<<		"5. new world\n"
 				<<		"->";
 				cin >> oceano;
-			}while(Opcion(oceano, 6));
+			}while(Opcion(oceano, 5));
 			
 			cout << "Ingrese la tripulacion:";
-			cin >> tripulacion;
+			cin.ignore();
+			getline(cin, tripulacion);
 			
 			cout << "Ingrese su funcion: ";
 			cin >> funcion;
@@ -99,7 +101,7 @@ Bando* pedirBando()
 	}	
 }
 
-FrutaDiablo* agregarFruta()
+FrutaDiablo* pedirFruta()
 {
 	int op = 0;
 
@@ -110,17 +112,18 @@ FrutaDiablo* agregarFruta()
 		<<		"2. Logia\n"
 		<<		"->";
 		cin >> op;
-	}while(Opcion(op,3));
+	}while(Opcion(op,2));
 	
 	string nombre;
 	cout << "Ingrese el nombre de la Fruta del diablo: ";
-	cin >> nombre;
+	cin.ignore();
+	getline(cin, nombre);
 
 	switch(op)
 	{
 		case 0:{
-			strin descripcion;
-			cout << "Ingrese la descripcion:"
+			string descripcion;
+			cout << "Ingrese la descripcion:";
 			cin >> descripcion;
 			return new Paramecia(nombre, descripcion);
 		}
@@ -135,7 +138,7 @@ FrutaDiablo* agregarFruta()
 				<<		"2. Legendaria\n"
 				<<		"->";
 				cin >> tipo;
-			}while(Opcion(tipo, 3));
+			}while(Opcion(tipo, 2));
 			
 			cout << "Ingrese el animal al que representa: ";
 			cin >> animal;
@@ -149,15 +152,91 @@ FrutaDiablo* agregarFruta()
 			cout << "Ingrese el elemento: ";
 			cin >> elemento;
 
-			return new Logia(elemento);
+			return new Logia(nombre, elemento);
 			break;
 		}
 	}
 }
 
-void agregarSer(vector<Ser*> seres, vector<FrutaDiablo*> frutas)
+void agregarSer(vector<Ser*> &seres, vector<FrutaDiablo*> &frutas)
 {
+	int raza;
+	int edad;
+	string name;
+	FrutaDiablo* fruta;
+	bool hakiObs;
+	bool hakiArmadura;
+	bool hakiRey;
+	Bando* bando;
+
 	
+	do{
+		cout << "Ingrese el tipo: \n"
+		<<		"0. gyojin\n"
+		<<		"1. kyojin\n"
+		<<		"2. ningyo\n"
+		<<		"3. humano\n"
+		<<		"4. mink\n"
+		<<		"5. skypieans\n"
+		<<		"->";
+		cin >> raza;
+	}while(Opcion(raza, 5));
+
+	do{
+		cout << "Ingrese la edad: ";
+		cin >> edad;
+	}while(edad < 0);
+
+	cout << "Ingrese el nombre: ";
+	cin.ignore();
+	getline(cin, name);
+
+	char resp;
+	cout << "Tiene fruta del diablo[S/N]: ";
+	cin >> resp;
+	if(resp == 'S' || resp == 's')
+	{
+		fruta = pedirFruta();
+		frutas.push_back(fruta);
+	}else fruta = new FrutaDiablo();
+
+	cout << "Maneja el haki de observacion?[S/N]";
+	cin >> resp;
+	hakiObs = (resp == 'S' || resp == 's');
+
+	cout << "Maneja el haki de armadura?[S/N]";
+	cin >> resp;
+	hakiArmadura = (resp == 'S' || resp == 's');
+
+	cout << "Maneja el haki del Rey?[S/N]";
+	cin >> resp;
+	hakiRey = (resp == 'S' || resp == 's');
+
+	bando = pedirBando();
+
+
+	seres.push_back(new Ser(raza, edad, name, fruta, hakiObs, hakiArmadura, hakiRey, bando));
+	guardarSer(seres.back());
+}
+
+void verSeres(vector<Ser*> seres)
+{
+	for(int i = 0; i < seres.size(); i++)
+	{
+		cout << "\n________________________________________________\n"
+		<<		seres[i]->to_string();
+	}
+	cout << "\n________________________________________________\n";
+}
+
+void verFrutas(vector<FrutaDiablo*> frutas)
+{
+	for(int i = 0; i < frutas.size(); i++)
+	{
+		cout << "\n________________________________________________\n"
+		<<		frutas[i]->to_string();
+	}
+	cout << "\n________________________________________________\n";
 }
 
 int main()
@@ -165,8 +244,31 @@ int main()
 	vector<Ser*> seres;
 	vector<FrutaDiablo*> frutas;
 
-	delete seres[];
-	delete frutas[];
+	int op = 1;
+
+	while(op != 0)
+	{
+		cout << "1. Agregar ser.\n"
+		<< 		"2. Ver seres.\n"
+		<<		"3. Ver frutas del diablo \n"
+		<<		"0. Salir\n"
+		<<		"->";
+		cin >> op;
+		if(op == 1)
+			agregarSer(seres, frutas);
+		else if(op == 2)
+			verSeres(seres);
+		else if(op == 3)
+			verFrutas(frutas);
+		else if(op != 0)
+			cout << "Opcion no valida";
+	}
+
+
+	for(int i = 0; i < seres.size(); i++)
+		delete seres[i];
+	for(int i = 0; i < frutas.size(); i++)
+		delete frutas[i];
 	return 0;
 }
 

@@ -11,11 +11,10 @@ class FrutaDiablo
 		string nombre;
 
 		//Constructor
-		FrutaDiablo(string name){
-			nombre = name;
-		}
+		FrutaDiablo(){}
+		FrutaDiablo(string name);
 
-		virtual to_string() = 0; 
+		virtual string to_string(){return "No tiene fruta del diablo.";}
 
 		virtual ~FrutaDiablo(){};
 };
