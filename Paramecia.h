@@ -8,9 +8,14 @@ class Paramecia : public FrutaDiablo
 	public:
 		string descripcion;	
 
+		//Constructor
+		Paramecia(string name, string des) : FrutaDiabloi(name){
+			descripcion = des;
+		}
+
 		string to_string()
 		{
-			return "Paramecia\nNombre: " + nombre + "\nDescripcion: " + descripcion + "\n";
+			return "Paramecia\n\tNombre: " + nombre + "\n\tDescripcion: " + descripcion + "\n";
 		}
 };
 

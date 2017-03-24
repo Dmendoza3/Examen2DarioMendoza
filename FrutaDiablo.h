@@ -11,7 +11,9 @@ class FrutaDiablo
 		string nombre;
 
 		//Constructor
-		FrutaDiablo(){};
+		FrutaDiablo(string name){
+			nombre = name;
+		}
 
 		virtual to_string() = 0; 
 

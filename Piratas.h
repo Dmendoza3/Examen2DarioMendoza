@@ -6,14 +6,18 @@
 class Piratas : public Bando
 {
 	public:
-		Piratas();
-
 		int oceano;
 		string tripulacion;
 		string funcion;
 
+		Piratas(int oc, string trip, string func){
+			oceano = oc;
+			tripulacion = trip;
+			funcion = func;
+		}
+
 		string Oceano(){
-			return (string){"east", "west", "south", "north blue", "grand line", "new world"}[oceano];
+			return (string[6]){"east", "west", "south", "north blue", "grand line", "new world"}[oceano];
 		}
 
 		string to_string()

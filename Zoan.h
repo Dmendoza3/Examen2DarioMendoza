@@ -9,13 +9,18 @@ class Zoan : public FrutaDiablo
 		int tipo;
 		string animal;
 
+		Zoan(string name, int ti, string ani) : FrutaDiablo(name){
+			tipo = tipo;
+			animal = ani;
+		}
+
 		string Tipo(){
-			return (string[]){"Normal", "Prehistorica", "Legendaria"}[tipo];
+			return (string[3]){"Normal", "Prehistorica", "Legendaria"}[tipo];
 		}
 		
 		string to_string()
         {
-            return "Zoan\nNombre: " + nombre + "\nTipo: " + Tipo + "\nAnimal: " + animal + "\n";
+            return "Zoan\n\tNombre: " + nombre + "\n\tTipo: " + Tipo + "\n\tAnimal: " + animal + "\n";
         }
 };
 

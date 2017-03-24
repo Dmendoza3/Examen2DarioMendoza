@@ -6,13 +6,17 @@
 class Marina : public Bando
 {
 	public:
-		Marina();
-
 		string fechaIngreso;
 		int rango;
 
+		Marina(string fecha, int ran)
+		{
+			fechaIngreso = fecha;
+			rango = ran;
+		}
+
 		string Rango(){
-			return (string){"cadete", "teniente", "vice-almirante", "almirante", "almirante de flota"}[rango];
+			return (string[5]){"cadete", "teniente", "vice-almirante", "almirante", "almirante de flota"}[rango];
 		}
 
 		string to_string()

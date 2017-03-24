@@ -1,14 +1,16 @@
 #include "Bando.h"
 
 #ifndef REVOLUCIONARIOS
-#define REVOLUCIONARIO
+#define REVOLUCIONARIOS
 
 class Revolucionarios : public Bando
 {
 	public:
-		Revolucionarios();
-
 		string fechaIngreso;
+
+		Revolucionarios(string fecha){
+			fechaIngreso = fecha;
+		}
 
 		string to_string()
         {
